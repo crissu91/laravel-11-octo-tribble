@@ -8,7 +8,7 @@
         {{--Session Messages--}}
         @if (session('success'))
             <div>
-                <p class="text-green-500">{{session('success')}}</p>
+                <x-flashMsg msg="{{session('success')}}"/>
             </div>
         @endif
 
