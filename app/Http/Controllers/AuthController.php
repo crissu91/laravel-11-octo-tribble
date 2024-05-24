@@ -22,7 +22,7 @@ class AuthController extends Controller
         //Login
         Auth::login($user);
         //Redirect
-        return redirect()->route("home");
+        return redirect()->route("posts.index");
     }
     //Login User
     public function login(Request $request)
@@ -53,6 +53,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('posts.index');
     }
 }
