@@ -19,10 +19,28 @@ class AuthController extends Controller
         ]);
         //Register
         $user = User::create($fields);
-
         //Login
         Auth::login($user);
         //Redirect
         return redirect()->route("home");
+    }
+    //Login User
+    public function login(Request $request)
+    {
+        //Validate
+        $fields = $request->validate([
+            "email" => ["required", "email", "max:255"],
+            "password" => ["required"],
+        ]);
+
+        //Login
+
+        if (Auth::attempt($fields, $request->remember)) {
+            return redirect()->intended();
+        } else {
+            return back()->withErrors([
+                'failed' => 'Credentials not valid. Try again.'
+            ]);
+        }
     }
 }
