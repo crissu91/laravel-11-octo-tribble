@@ -36,11 +36,23 @@ class AuthController extends Controller
         //Login
 
         if (Auth::attempt($fields, $request->remember)) {
-            return redirect()->intended();
+            return redirect()->intended('dashboard');
         } else {
             return back()->withErrors([
                 'failed' => 'Credentials not valid. Try again.'
             ]);
         }
+    }
+
+    //Logout user
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }
