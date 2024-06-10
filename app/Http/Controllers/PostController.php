@@ -39,7 +39,7 @@ class PostController extends Controller
 
         Auth::user()->posts()->create($fields);
 
-        return back()->with('success', 'Your post was created.');
+        return redirect()->route('dashboard')->with('success', 'Your post was created.');
     }
 
     /**
